@@ -1,4 +1,4 @@
-def lerMatrizCidades(arquivo_path="../dados.txt"):
+def lerMatrizTxt(arquivo_path):
     matriz = []
 
     with open(arquivo_path, "r", encoding="utf-8") as arquivo:

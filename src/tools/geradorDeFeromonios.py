@@ -1,12 +1,12 @@
 import random
+import config
 
-def gerarFeromonios():
-    num_feromonios = 101
+def gerarFeromonios(num_feromonios = config.CIDADES):
 
     with open("src/feromonios.txt", "w", encoding="utf-8") as arquivo:
         arquivo.write(", ")
         arquivo.write("Cidade da Pizzaria, ")
-        for i in range(1, 101):
+        for i in range(1, num_feromonios):
             arquivo.write(f"Cidade {i}, ")
         arquivo.write("\n")
         with open("src/dados.txt", "r", encoding="utf-8") as dados:
