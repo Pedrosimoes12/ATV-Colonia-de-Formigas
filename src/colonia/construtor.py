@@ -8,14 +8,14 @@ def construirCaminho(matrizDistancia, matrizFeromonio):
     caminho = [cidadeAtual]
 
     while len(visitadas) < config.CIDADES:
-        probabilidades = calcularProbabilidades(
+        destinosPossiveis, probabilidades = calcularProbabilidades(
             cidadeAtual, visitadas, matrizDistancia, matrizFeromonio
         )
 
         if probabilidades is None:
             return None  # caminho impossível
 
-        destino = random.choices(range(config.CIDADES), weights=probabilidades)[0]
+        destino = random.choices(destinosPossiveis, weights=probabilidades)[0]
         cidadeAtual = destino
         visitadas.add(destino)
         caminho.append(destino)
