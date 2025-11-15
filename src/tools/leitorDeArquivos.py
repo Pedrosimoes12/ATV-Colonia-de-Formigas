@@ -1,28 +1,33 @@
-def lerMatrizTxt(arquivo_path):
+def lerMatrizTxt(caminhoArquivo):
     matriz = []
 
-    with open(arquivo_path, "r", encoding="utf-8") as arquivo:
+    with open(caminhoArquivo, "r", encoding="utf-8") as arquivo:
         linhas = arquivo.readlines()
 
-        # Ignora a primeira linha (cabeçalho com nomes das cidades)
+        # Ignora o cabeçalho completamente
         for linha in linhas[1:]:
-            # Remove espaços extras e quebra de linha
             linha = linha.strip()
 
-            # Remove o texto "Cidade X," do início
-            # e mantém apenas os números separados por vírgula
             partes = linha.split(",")
+
+            # Remove strings vazias criadas por vírgulas extra
             partes = [p.strip() for p in partes if p.strip() != ""]
 
-            # Ignora o primeiro elemento (ex: "Cidade 1")
-            distancias = []
+            # Remove nome ("Cidade X" ou "Cidade da Pizzaria")
+            valores = []
             for item in partes[1:]:
                 try:
-                    distancias.append(float(item))
-                except ValueError:
-                    pass  # ignora se não for número
-            matriz.append(distancias)
+                    valores.append(float(item))
+                except:
+                    valores.append(0.0)
 
-    return matriz
+            matriz.append(valores)
 
+    # --- Ajuste final: torna a matriz quadrada ---
+    n = min(len(matriz), len(matriz[0]))
 
+    matrizCorrigida = []
+    for i in range(n):
+        matrizCorrigida.append(matriz[i][:n])
+
+    return matrizCorrigida
